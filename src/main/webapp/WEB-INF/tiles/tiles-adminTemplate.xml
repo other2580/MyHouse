@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- 定义后台模板  -->
+	<definition name="adminTemplate" template="/WEB-INF/jsp/shared/admin-template.jsp">
+		<put-attribute name="navbar" value="/WEB-INF/jsp/shared/admin-navbar.jsp" />
+	</definition>
+	
+	<!-- 后台主页 -->
+	<definition name="admin/admin-index" extends="adminTemplate">
+		<put-attribute name="pageTitle" value="myHouse 管理系统" />
+		<put-attribute name="main" value="/WEB-INF/jsp/admin/admin-index.jsp" />
+	</definition>
+</tiles-definitions>

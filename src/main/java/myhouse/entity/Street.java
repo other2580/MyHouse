@@ -1,8 +1,16 @@
 package myhouse.entity;
 
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Street {
 	private Integer id;
+	@NotBlank(message = "请填写街道名称")
+	@Length(max = 20, message = "长度不能超过20个字符")
 	private String name;
+	@Min(value = 1, message = "请选择具体区域")
 	private Integer districtId;
 
 	public Street() {

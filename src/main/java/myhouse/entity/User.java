@@ -1,11 +1,23 @@
 package myhouse.entity;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class User {
 	private Integer id;
+	@NotBlank(message = "请输入用户名！")
+	@Length(max = 20, message = "长度不能超过20个字符")
 	private String userName;
+	@NotBlank(message = "请输入密码！")
+	@Length(max = 20, message = "长度不能超过12个字符")
 	private String password;
+	@NotBlank(message = "请输入姓名！")
+	@Length(max = 20, message = "长度不能超过20个字符")
 	private String name;
+	@NotBlank(message = "请输入电话号码！")
 	private String phone;
+	@Email(message = "请输入正确的邮箱地址！")
 	private String email;
 	private Integer isAdmin;
 	private Integer isInUse;
