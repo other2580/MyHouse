@@ -19,7 +19,7 @@ public interface DistrictMapper {
 	@Options(keyProperty = "id", useGeneratedKeys = true)
 	public int add(District district);
 
-	@Delete("DELETE FORM `District` WHERE Id = #{id}")
+	@Delete("DELETE FROM `District` WHERE Id = #{id}")
 	public int delete(@Param("id") int id);
 
 	@Update("UPDATE `District` SET `name` = #{name} WHERE Id = #{id}")

@@ -18,7 +18,7 @@ public interface TypeMapper {
 	@Options(keyProperty = "id", useGeneratedKeys = true)
 	public int add(Type Type);
 
-	@Delete("DELETE FORM `Type` WHERE Id = #{id}")
+	@Delete("DELETE FROM `Type` WHERE Id = #{id}")
 	public int delete(@Param("id") int id);
 
 	@Update("UPDATE `Type` SET `name` = #{name} WHERE Id = #{id}")

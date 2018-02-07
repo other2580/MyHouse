@@ -33,6 +33,9 @@ public interface UserMapper {
 
 	@Select("SELECT * FROM `User` WHERE `userName` = #{userName} AND `password` = #{password}")
 	public User login(@Param("userName") String userName, @Param("password") String password);
+	
+	@Select("SELECT * FROM `User` WHERE `userName` = #{userName} AND `password` = #{password} AND IsAdmin = 1")
+	public User adminLogin(@Param("userName") String userName, @Param("password") String password);
 
 	@Select("SELECT * FROM `User` WHERE `userName` = #{userName}")
 	public User checkUserNameByUse(@Param("userName") String userName);

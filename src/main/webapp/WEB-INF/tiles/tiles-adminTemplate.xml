@@ -8,9 +8,25 @@
 		<put-attribute name="navbar" value="/WEB-INF/jsp/shared/admin-navbar.jsp" />
 	</definition>
 	
+	<!-- 后台登录页 -->
+	<definition name="admin/admin-login" extends="adminTemplate">
+		<put-attribute name="pageTitle" value="欢迎登录后台" />
+		<put-attribute name="navbar" value="" />
+		<put-attribute name="main" value="/WEB-INF/jsp/admin/admin-login.jsp" />
+	</definition>
 	<!-- 后台主页 -->
 	<definition name="admin/admin-index" extends="adminTemplate">
 		<put-attribute name="pageTitle" value="myHouse 管理系统" />
 		<put-attribute name="main" value="/WEB-INF/jsp/admin/admin-index.jsp" />
+	</definition>
+	<!-- 房屋类型管理 -->
+	<definition name="admin/typeManager" extends="adminTemplate">
+		<put-attribute name="pageTitle" value="分类管理" />
+		<put-attribute name="main" value="/WEB-INF/jsp/admin/typeManager.jsp" />
+	</definition>
+		<!-- 房屋类型管理 -->
+	<definition name="admin/districtManager" extends="adminTemplate">
+		<put-attribute name="pageTitle" value="区域管理" />
+		<put-attribute name="main" value="/WEB-INF/jsp/admin/districtManager.jsp" />
 	</definition>
 </tiles-definitions>

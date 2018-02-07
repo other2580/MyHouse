@@ -12,14 +12,14 @@
 
     <!-- Bootstrap -->
     <link href="${initParam.staticUrl}/js/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <script src="${initParam.staticUrl}/js/jquery-1.12.4.min.js"></script>
+    <script src="${initParam.staticUrl}/js/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--font-awesome-->  
+	<link href="${initParam.staticUrl}/css/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  	<style>body { padding-top: 55px; }</style>
   </head>
   <body>
-  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="${initParam.staticUrl}/js/jquery-1.12.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="${initParam.staticUrl}/js/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<tiles:insertAttribute name="navbar" />
+	<tiles:insertAttribute name="navbar" ignore="true" />
 	<tiles:insertAttribute name="main" />
   </body>
 </html>

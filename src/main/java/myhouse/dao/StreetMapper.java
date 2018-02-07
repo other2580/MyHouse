@@ -18,7 +18,7 @@ public interface StreetMapper {
 	@Options(keyProperty = "id", useGeneratedKeys = true)
 	public int add(Street Street);
 
-	@Delete("DELETE FORM `Street` WHERE Id = #{id}")
+	@Delete("DELETE FROM `Street` WHERE Id = #{id}")
 	public int delete(@Param("id") int id);
 
 	@Update("UPDATE `Street` SET `name` = #{name}, `DistrictId` = #{districtId} WHERE Id = #{id}")
