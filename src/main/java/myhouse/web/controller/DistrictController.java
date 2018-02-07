@@ -1,6 +1,7 @@
 package myhouse.web.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -27,6 +28,12 @@ public class DistrictController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("data", districtService.getAll());
 		return map;
+	}
+
+	@RequestMapping("/getAllDistrict")
+	@ResponseBody
+	public List<District> getAllDistrict() {
+		return districtService.getAll();
 	}
 
 	@RequestMapping("/getDistrictById")

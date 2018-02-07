@@ -1,14 +1,12 @@
-package myhouse.dao;
+package myhouse.service;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import myhouse.entity.Street;
 
-@Repository
-public interface StreetMapper {
+public interface StreetService {
 	public int add(Street Street);
 
 	public int delete(@Param("id") int id);
@@ -27,6 +25,6 @@ public interface StreetMapper {
 	public List<Street> getStreetsPagings(@Param("districtId") int districtId,
 			@Param("streetName") String streetName, @Param("start") int start,
 			@Param("length") int length);
-
+	
 	public List<String> getStreetByPrefix(@Param("prefix") String prefix);
 }

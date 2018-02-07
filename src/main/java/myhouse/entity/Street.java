@@ -12,6 +12,7 @@ public class Street {
 	private String name;
 	@Min(value = 1, message = "请选择具体区域")
 	private Integer districtId;
+	private String districtName;
 
 	public Street() {
 	}
@@ -44,5 +45,13 @@ public class Street {
 
 	public void setDistrictId(Integer districtId) {
 		this.districtId = districtId;
+	}
+
+	public String getDistrictName() {
+		return districtName;
+	}
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
 	}
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myhouse.dao.DistrictMapper">
+	<insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="District">
+		INSERT INTO `District` (`name`) VALUES(#{name})
+	</insert>
+	<delete id="delete" parameterType="int">
+		DELETE FROM `District` WHERE `Id` = #{id}
+	</delete>
+	<update id="update" parameterType="District">
+		UPDATE `District` SET `name` = #{name} WHERE `Id` = #{id}
+	</update>
+	<select id="getDistrictById" resultType="District" parameterType="int">
+		SELECT * FROM District WHERE `Id` = #{id}
+	</select>
+	<select id="checkNameByUse" resultType="District" parameterType="string">
+		SELECT * FROM District WHERE `name` = #{name}
+	</select>
+	<select id="getAll" resultType="District">
+		SELECT * FROM District
+	</select>
+</mapper>

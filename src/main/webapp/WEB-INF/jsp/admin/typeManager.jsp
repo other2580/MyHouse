@@ -15,18 +15,18 @@
   	<div class="col-md-12">
   	  <div class="panel panel-primary">
 		<div class="panel-heading">
-		  <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;分类详情</h3>
+		  <h3 class="panel-title"><i class="fa fa-table fa-lg"></i>&nbsp;分类详情</h3>
 		</div>
 		<div class="panel-body">
-		  <table id="typeTable" class="table table-striped table-bordered">
-		  	<thead>
-		  	  <tr>
-		  	  	<th>ID</th>
-		  	  	<th>类型名称</th>
-		  	  	<th>操作</th>
-		  	  </tr>
-		  	</thead>
-		  </table>
+		   	<table id="typeTable" class="table table-striped table-bordered table-hover">
+			  	<thead>
+			  	  <tr>
+			  	  	<th>ID</th>
+			  	  	<th>类型名称</th>
+			  	  	<th>操作</th>
+			  	  </tr>
+			  	</thead>
+			</table>
 		</div>
 	  </div>
   	</div>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myhouse.dao.StreetMapper">
+	<insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Street">
+		INSERT INTO `Street` (`NAME`, `DistrictId`) VALUES(#{name}, #{districtId})
+	</insert>
+	<delete id="delete" parameterType="int">
+		DELETE FROM `Street` WHERE Id = #{id}
+	</delete>
+	<update id="update" parameterType="Street">
+		UPDATE `Street` SET `name` = #{name}, `DistrictId` = #{districtId} WHERE Id = #{id}
+	</update>
+	
+	<sql id="sql">
+		SELECT s.*,d.`NAME` AS districtName FROM Street AS s LEFT JOIN District AS d ON(s.`DistrictId` =d.`Id`)
+	</sql>
+	<select id="getStreetById" resultType="Street" parameterType="int">
+		<include refid="sql" /> WHERE s.id = #{id}
+	</select>
+	<select id="checkNameByUse" resultType="Street" parameterType="string">
+		<include refid="sql" /> WHERE s.`name` = #{name}
+	</select>
+	<select id="getAll" resultType="Street">
+		<include refid="sql" />
+	</select>
+	<select id="fetchStreetRows" resultType="int" parameterType="hashmap">
+		SELECT COUNT(1) FROM `Street`
+		<where>
+			<if test="districtId > 0"> AND DistrictId = #{districtId}</if>
+			<if test="streetName != null and !streetName.isEmpty()"> AND `name` LIKE CONCAT('%',#{streetName},'%')</if>
+		</where>
+	</select>
+	<select id="getStreetsPagings" resultType="Street" parameterType="hashmap">
+		<include refid="sql" />
+		<where>
+			<if test="districtId > 0"> AND DistrictId = #{districtId}</if>
+			<if test="streetName != null and !streetName.isEmpty()"> AND s.`name` LIKE CONCAT('%',#{streetName},'%')</if>
+		</where>
+		LIMIT #{start},#{length}
+	</select>
+	<select id="getStreetByPrefix" resultType="String" parameterType="String">
+		SELECT `name` FROM `Street` WHERE `name` LIKE CONCAT('%',#{prefix},'%')
+	</select>
+</mapper>

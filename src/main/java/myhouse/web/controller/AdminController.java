@@ -26,4 +26,10 @@ public class AdminController {
 	public String districtManager() {
 		return "admin/districtManager";
 	}
+	
+	@RequestMapping("/streetManager")
+	public String streetManager() {
+		return "admin/streetManager";
+	}
+	
 }

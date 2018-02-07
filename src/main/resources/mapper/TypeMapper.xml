@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myhouse.dao.TypeMapper">
+	<insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Type">
+		INSERT INTO `Type` (`name`) VALUES(#{name})
+	</insert>
+	<delete id="delete" parameterType="int">
+		DELETE FROM `Type` WHERE `Id` = #{id}
+	</delete>
+	<update id="update" parameterType="Type">
+		UPDATE `Type` SET `name` = #{name} WHERE `Id` = #{id}
+	</update>
+	<select id="getTypeById" resultType="Type" parameterType="int">
+		SELECT * FROM Type WHERE `Id` = #{id}
+	</select>
+	<select id="checkNameByUse" resultType="Type" parameterType="string">
+		SELECT * FROM Type WHERE `name` = #{name}
+	</select>
+	<select id="getAll" resultType="Type">
+		SELECT * FROM Type
+	</select>
+</mapper>

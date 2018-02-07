@@ -24,9 +24,14 @@
 		<put-attribute name="pageTitle" value="分类管理" />
 		<put-attribute name="main" value="/WEB-INF/jsp/admin/typeManager.jsp" />
 	</definition>
-		<!-- 房屋类型管理 -->
+	<!-- 区域管理 -->
 	<definition name="admin/districtManager" extends="adminTemplate">
 		<put-attribute name="pageTitle" value="区域管理" />
 		<put-attribute name="main" value="/WEB-INF/jsp/admin/districtManager.jsp" />
+	</definition>
+	<!-- 街道管理 -->
+	<definition name="admin/streetManager" extends="adminTemplate">
+		<put-attribute name="pageTitle" value="街道管理" />
+		<put-attribute name="main" value="/WEB-INF/jsp/admin/streetManager.jsp" />
 	</definition>
 </tiles-definitions>
