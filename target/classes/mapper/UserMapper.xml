@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myhouse.dao.UserMapper">
+	<insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="User">
+		INSERT INTO `USER` (`UserName`, `PASSWORD`, `NAME`, `Phone`, `Email`,`IsAdmin`, `IsInUse`) 
+			VALUES (#{userName}, #{password}, #{name}, #{phone}, #{email}, #{isAdmin}, #{isInUse})
+	</insert>
+	<delete id="delete" parameterType="int">
+		DELETE FROM `User` WHERE `id` = #{id}
+	</delete>
+	<update id="update" parameterType="User">
+		UPDATE `User` SET `UserName` = #{userName}, `PASSWORD` = #{password}, `NAME` = #{name}, `Phone` = #{phone}, `Email` = #{email},`IsAdmin` = #{isAdmin}, `IsInUse` = #{isInUse} 
+			WHERE `id` = #{id}
+	</update>
+	<update id="modifyByUse" parameterType="hashmap">
+		UPDATE `User` SET `IsInUse` = #{isInUse} WHERE `id` = #{id}
+	</update>
+		<update id="modifyByAdmin" parameterType="hashmap">
+		UPDATE `User` SET `IsAdmin` = #{isAdmin} WHERE `id` = #{id}
+	</update>
+	<select id="getUserById" resultType="User" parameterType="int">
+		SELECT * FROM `User` WHERE `id` = #{id}
+	</select>
+	<select id="login" resultType="User" parameterType="hashmap">
+		SELECT * FROM `User` WHERE `userName` = #{userName} AND `password` = #{password}
+	</select>
+	<select id="adminLogin" resultType="User" parameterType="hashmap">
+		SELECT * FROM `User` WHERE `userName` = #{userName} AND `password` = #{password} AND IsAdmin = 1
+	</select>
+	<select id="checkUserNameByUse" resultType="User" parameterType="string">
+		SELECT * FROM `User` WHERE `userName` = #{userName}
+	</select>
+	<select id="getAllUser" resultType="User">
+		SELECT * FROM `User`
+	</select>
+	<select id="fetchUserRows" resultType="int" parameterType="hashmap">
+		SELECT COUNT(1) FROM `User`
+		<where>
+			<if test="isAdmin &lt; 2"> AND isAdmin = #{isAdmin}</if>
+			<if test="isInUse &lt; 2"> AND isInUse = #{isInUse}</if>
+			<if test="userName != null and !userName.isEmpty()"> AND userName LIKE CONCAT('%',#{userName},'%')</if>
+		</where>
+	</select>
+	<select id="getUserPagings" resultType="User" parameterType="hashmap">
+		SELECT * FROM `User`
+		<where>
+			<if test="isAdmin &lt; 2"> AND isAdmin = #{isAdmin}</if>
+			<if test="isInUse &lt; 2"> AND isInUse = #{isInUse}</if>
+			<if test="userName != null and !userName.isEmpty()"> AND userName LIKE CONCAT('%',#{userName},'%')</if>
+		</where>
+		LIMIT #{start},#{length}
+	</select>
+	<select id="getUserByPrefix" resultType="String" parameterType="String">
+		SELECT `userName` FROM `User` WHERE `userName` LIKE CONCAT('%',#{prefix},'%')
+	</select>
+</mapper>

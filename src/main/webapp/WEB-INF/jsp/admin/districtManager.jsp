@@ -8,7 +8,7 @@
 <div class="container">
   <div class="row">
   	<div class="page-header">
-  		<h1>区域管理<small> 房屋所属区域</small></h1>
+  		<h1><i class="fa fa-map"></i>&nbsp;区域管理<small> 房屋所属区域</small></h1>
   		<button class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square-o fa-lg"></i>&nbsp;添加区域</button>
   	</div>
   </div>

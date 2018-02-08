@@ -34,4 +34,9 @@
 		<put-attribute name="pageTitle" value="街道管理" />
 		<put-attribute name="main" value="/WEB-INF/jsp/admin/streetManager.jsp" />
 	</definition>
+	<!-- 用户管理 -->
+	<definition name="admin/userManager" extends="adminTemplate">
+		<put-attribute name="pageTitle" value="用户管理" />
+		<put-attribute name="main" value="/WEB-INF/jsp/admin/userManager.jsp" />
+	</definition> 
 </tiles-definitions>

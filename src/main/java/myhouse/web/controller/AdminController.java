@@ -16,20 +16,25 @@ public class AdminController {
 	public String index() {
 		return "admin/admin-index";
 	}
-	
+
 	@RequestMapping("/typeManager")
 	public String typeManager() {
 		return "admin/typeManager";
 	}
-	
+
 	@RequestMapping("/districtManager")
 	public String districtManager() {
 		return "admin/districtManager";
 	}
-	
+
 	@RequestMapping("/streetManager")
 	public String streetManager() {
 		return "admin/streetManager";
 	}
-	
+
+	@RequestMapping("/userManager")
+	public String userManager() {
+		return "admin/userManager"; 
+	}
+
 }

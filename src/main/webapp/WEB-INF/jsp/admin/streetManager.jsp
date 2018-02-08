@@ -8,7 +8,7 @@
 <div class="container">
   <div class="row">
   	<div class="page-header">
-  		<h1>街道管理<small> 房屋所属街道</small></h1>
+  		<h1><i class="fa fa-map-signs"></i>&nbsp;街道管理<small> 房屋所属街道</small></h1>
   		<button class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square-o fa-lg"></i>&nbsp;添加街道</button>
   	</div>
   </div>
@@ -20,17 +20,17 @@
 		</div>
 		<div class="panel-body">
 		  <div class="table-responsive">
-			  <table class="table table-bordered text-center ">
+			  <table class="table table-bordered text-center">
 			    <tr>
-			      <td>所属区域：</td>
+			      <td><i class="fa fa-map fa-lg"></i>&nbsp;所属区域：</td>
 			      <td>
 			        <select class="form-control" id="districtSelect" name="districtId">
 			          <option value="0">请选择...</option>
 			        </select>
 			      </td>
-			      <td>街道名：</td>
+			      <td><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;街道名：</td>
 			      <td>
-			      	<input class="form-control" name="streetName" id="streetName" list="keywordList" autocomplete="off" />
+			      	<input class="form-control" name="streetName" id="streetName" list="keywordList" autocomplete="off" placeholder="请输入街区名..."/>
 			      	<datalist id="keywordList"></datalist>
 			      </td>
 			      <td>
