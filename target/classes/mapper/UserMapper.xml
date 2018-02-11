@@ -3,7 +3,7 @@
  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myhouse.dao.UserMapper">
-	<insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="User">
+	<insert id="register" keyProperty="id" useGeneratedKeys="true" parameterType="User">
 		INSERT INTO `USER` (`UserName`, `PASSWORD`, `NAME`, `Phone`, `Email`,`IsAdmin`, `IsInUse`) 
 			VALUES (#{userName}, #{password}, #{name}, #{phone}, #{email}, #{isAdmin}, #{isInUse})
 	</insert>

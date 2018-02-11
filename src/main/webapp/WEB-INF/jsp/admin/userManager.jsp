@@ -4,133 +4,7 @@
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/dataTable/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/dataTable/dataTables.bootstrap.js"></script>
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/jquery.validate.min.js"></script>   
-<script>
-$(function(){
-	var table = $("#userTable").DataTable({
-		ajax: {
-			url: "getUserInfo",
-			data: function(param){
-				param.isAdmin = $("select[name='isAdmin']").val();
-				param.isInUse = $("select[name='isInUse']").val();
-				param.userName = $("input[name='userName']").val();
-			}
-		},
-		columns:[
-			{"data":"id"},
-			{"data":"userName"},
-			{"data":"name"},
-			{"data":"phone"},
-			{"data":"email"}
-		],
-		columnDefs : [ {
-			"render" : function(data, type, row) {
-				var down = '<i class="fa fa-user-secret"></i>&nbsp;管理员&emsp;<button class="level btn btn-danger btn-sm" data-id="'+row.id+'" data-use="'+row.isAdmin+'"><i class="fa fa-level-down"></i>&nbsp;降权</button>'
-				var up = '<i class="fa fa-user-circle"></i>&nbsp;普通用户&emsp;<button class="level btn btn-warning btn-sm" data-id="'+row.id+'" data-use="'+row.isAdmin+'"><i class="fa fa-level-up"></i>&nbsp;提权</button>';
-				return row.isAdmin > 0 ? down : up;
-				},
-			"targets" : 5
-		},{
-			"render" : function(data, type, row) {
-				var one = '<button class="state btn btn-danger btn-sm" data-id="'+row.id+'" data-use="'+row.isInUse+'"><i class="fa fa-ban"></i>&nbsp;禁用</button>'
-				var two = '<button class="state btn btn-success btn-sm" data-id="'+row.id+'" data-use="'+row.isInUse+'"><i class="fa fa-send"></i>&nbsp;解禁</button>';
-				return row.isInUse > 0 ? one : two;
-				},
-			"targets" : 6
-		}],
-		language : {
-			"lengthMenu" : "_MENU_ 条记录每页",
-			"zeroRecords" : "没有找到记录",
-			"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-			"infoEmpty" : "无记录",
-			"infoFiltered" : "(从 _MAX_ 条记录过滤)",
-			"paginate" : {
-				"previous" : "上一页",
-				"next" : "下一页"
-			}
-		},
-		searching: false,
-		serverSide:true
-	});
-	
-	// 按条件搜索
-	$("#searchButton").click(function(){
-		table.ajax.reload(); 
-	});
-	
-	// 搜索框自动填充
-	$("input[name='userName']").keyup(function(){
-		if($(this).val().trim()==""){
-			$("#keywordList").empty();
-			return;
-		}
-		$.ajax({
-			url:"getUserByPrefix",
-			data:{prefix:$(this).val()},
-			type:"get",
-			dataType:"json",
-			success:function(json){
-				$("#keywordList").empty();
-				json.forEach(function(item,index){
-					var line = "<option>"+item+"</option>";
-					$("#keywordList").append(line);
-				});
-			}
-		});
-	});
-	
-	// 改变状态
-	$("#userTable").delegate("button.state ","click",function(){
-		// 拦截操作
-		if(!confirm("危险操作，确认继续？")){
-			return false;
-		}
-		var id = $(this).attr("data-id");
-		var isInUse = $(this).attr("data-use");
-		$.ajax({
-			url: "modifyByUse",
-			type: "get",
-			data: {"id":id, "isInUse":isInUse},
-			dataType: "json",
-			success: function(json){
-				if(json)
-					table.ajax.reload();
-				else
-					alert("未知原因修改失败！");
-			},
-			error: function(){
-				alert("异步调用出错！修改失败！");
-				return false;
-			}
-		});
-	});
-	
-	// 改变权重
-	$("#userTable").delegate("button.level ","click",function(){
-		// 拦截操作
-		if(!confirm("危险操作，确认继续？")){
-			return false;
-		}
-		var id = $(this).attr("data-id");
-		var isAdmin = $(this).attr("data-use");
-		$.ajax({
-			url: "modifyByAdmin",
-			type: "get",
-			data: {"id":id, "isAdmin":isAdmin},
-			dataType: "json",
-			success: function(json){
-				if(json)
-					table.ajax.reload();
-				else
-					alert("未知原因修改失败！");
-			},
-			error: function(){
-				alert("异步调用出错！修改失败！");
-				return false;
-			}
-		});
-	});
-});
-</script> 
+<script type="text/javascript" src="${initParam.staticUrl}/js/include/admin/userManager.js"></script>
 <div class="container">
   <div class="row">
 	<div class="page-header">
@@ -148,7 +22,7 @@ $(function(){
 	      <tr>
 	    	<td><i class="fa fa-bug fa-lg"></i>&nbsp;权限：</td>
 	    	  <td>
-	    		<select name="isAdmin" class="form-control">
+	    		<select name="searchIsAdmin" class="form-control">
 	    			<option value="2">请选择...</option>
 	    			<option value="0">普通用户</option>
 	    			<option value="1">管理员</option>
@@ -156,7 +30,7 @@ $(function(){
 	    	 </td>
 	    	 <td><i class="fa fa-ban fa-lg"></i>&nbsp;状态：</td>
 	    	 <td>
-	    		<select name="isInUse" class="form-control">
+	    		<select name="searchIsInUse" class="form-control">
 	    			<option value="2">请选择...</option>
 	    			<option value="0">禁用</option>
 	    			<option value="1">正常</option>
@@ -164,7 +38,7 @@ $(function(){
 	    	 </td>
 	    	 <td><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;用户名：</td>
 	    	 <td>
-	    	 	<input name="userName" class="form-control" list="keywordList" autocomplete="off" placeholder="请输入用户名...">
+	    	 	<input name="userNameList" class="form-control" list="keywordList" autocomplete="off" placeholder="请输入用户名...">
 	    	 	<datalist id="keywordList"></datalist>
 	    	 </td>
 	    	 <td>
@@ -192,19 +66,52 @@ $(function(){
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  data-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus"></i>&nbsp;用户详情</h4>
       </div>
       <div class="modal-body">
-        ...
+        <form id="userForm">
+		  <div class="form-group">
+		    <label for="userName">用户名：</label>
+		    <input class="form-control" id="userName" name="userName" maxlength="20" placeholder="请输入用户名...">
+		  </div>
+		  <div class="form-group">
+		    <label for="password">登陆密码：</label>
+		    <input type="password" class="form-control" id="password" name="password" maxlength="12" placeholder="请输入密码...">
+		  </div>
+		  <div class="form-group">
+		    <label for=confirmPwd>确认密码：</label>
+		    <input type="password" class="form-control" id="confirmPwd" name="confirmPwd" maxlength="12" placeholder="请再次输入密码...">
+		  </div>
+		  <div class="form-group">
+		    <label for="name">姓名：</label>
+		    <input class="form-control" id="name" name="name" maxlength="20" placeholder="请输入真实姓名...">
+		  </div>
+		  <div class="form-group">
+		    <label for="phone">联系电话：</label>
+		    <input type="number" class="form-control" id="phone" name="phone" placeholder="请输入电话号码...">
+		  </div>
+		  <div class="form-group">
+		    <label for="email">邮箱地址：</label>
+		    <input type="email" class="form-control" id="email" name="email" placeholder="请输入邮箱地址...">
+		  </div>
+		  <div class="form-group">
+		    <label for="isAdmin">用户角色：</label>
+		    	<select id="isAdmin" name="isAdmin" class="form-control">
+	    			<option value="0">普通用户</option>
+	    			<option value="1">管理员</option>
+	    		</select>
+		  </div>
+		  <input type="hidden" name="isInUse" value="1">
+		</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="submitBtn"><i class="fa fa-user-plus"></i>&nbsp;添加</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-window-close-o fa-lg"></i>&nbsp;关闭</button>
       </div>
     </div>
   </div>

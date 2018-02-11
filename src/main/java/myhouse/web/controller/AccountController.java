@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,19 +66,53 @@ public class AccountController {
 	@ResponseBody
 	public boolean modifyByUse(int id, int isInUse) {
 		try {
-			return userService.modifyByUse(id, (isInUse > 0 ? 0 : 1)) > 0 ? true : false;
+			return userService.modifyByUse(id, (isInUse > 0 ? 0 : 1)) > 0
+					? true
+					: false;
 		} catch (Exception e) {
 			return false;
 		}
 	}
-	
+
 	@RequestMapping("admin/modifyByAdmin")
 	@ResponseBody
 	public boolean modifyByAdmin(int id, int isAdmin) {
 		try {
-			return userService.modifyByAdmin(id, (isAdmin > 0 ? 0 : 1)) > 0 ? true : false;
+			return userService.modifyByAdmin(id, (isAdmin > 0 ? 0 : 1)) > 0
+					? true
+					: false;
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@RequestMapping("admin/checkUserName")
+	@ResponseBody
+	public boolean checkUserName(
+			@RequestParam(name = "userName", required = true) String userName) {
+		if (userService.checkUserNameByUse(userName) == null)
+			return true;
+		else
+			return false;
+	}
+
+	@RequestMapping("admin/saveUser")
+	@ResponseBody
+	public Map<String, Object> saveUser(@Valid User user, BindingResult bindingResult) {
+		Map<String, Object> map = new HashMap<>();
+		if (bindingResult.hasErrors()) {
+			map.put("state", false);
+			map.put("message", "有选项不符合输入规则！");
+		} else {
+			try {
+				userService.register(user);
+				map.put("state", true);
+				map.put("message", "OK!");
+			} catch (Exception e) {
+				map.put("state", false);
+				map.put("message", e.getMessage());
+			}
+		}
+		return map;
 	}
 }

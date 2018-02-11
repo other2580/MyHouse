@@ -10,7 +10,7 @@ public class User {
 	@Length(max = 20, message = "长度不能超过20个字符")
 	private String userName;
 	@NotBlank(message = "请输入密码！")
-	@Length(max = 20, message = "长度不能超过12个字符")
+	@Length(max = 12, message = "长度不能超过12个字符")
 	private String password;
 	@NotBlank(message = "请输入姓名！")
 	@Length(max = 20, message = "长度不能超过20个字符")
