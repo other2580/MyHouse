@@ -51,6 +51,11 @@ public class StreetServiceImpl implements StreetService {
 	}
 
 	@Override
+	public List<Street> getStreetByDistrictId(int districtId) {
+		return streetMapper.getStreetByDistrictId(districtId);
+	}
+
+	@Override
 	public int fetchStreetRows(int districtId, String streetName) {
 		return streetMapper.fetchStreetRows(districtId, streetName);
 	}
@@ -58,12 +63,12 @@ public class StreetServiceImpl implements StreetService {
 	@Override
 	public List<Street> getStreetsPagings(int districtId, String streetName,
 			int start, int length) {
-		return streetMapper.getStreetsPagings(districtId, streetName, start, length);
+		return streetMapper.getStreetsPagings(districtId, streetName, start,
+				length);
 	}
 
 	@Override
 	public List<String> getStreetByPrefix(String prefix) {
 		return streetMapper.getStreetByPrefix(prefix);
 	}
-
 }

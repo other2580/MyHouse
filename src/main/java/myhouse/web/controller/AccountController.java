@@ -115,4 +115,10 @@ public class AccountController {
 		}
 		return map;
 	}
+	
+	@RequestMapping("admin/getUserName")
+	@ResponseBody
+	public List<User> getUserName(){
+		return userService.getUserInfo();
+	}
 }

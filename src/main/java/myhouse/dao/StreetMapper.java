@@ -21,6 +21,9 @@ public interface StreetMapper {
 
 	public List<Street> getAll();
 
+	public List<Street> getStreetByDistrictId(
+			@Param("districtId") int districtId);
+
 	public int fetchStreetRows(@Param("districtId") int districtId,
 			@Param("streetName") String streetName);
 

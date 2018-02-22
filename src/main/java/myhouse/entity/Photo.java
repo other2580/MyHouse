@@ -4,16 +4,17 @@ public class Photo {
 	private Integer id;
 	private String title;
 	private String fileName;
-	private Integer hourseId;
+	private Integer houseId;
 
 	public Photo() {
 	}
 
-	public Photo(Integer id, String title, String fileName, Integer hourseId) {
+	public Photo(Integer id, String title, String fileName, Integer houseId) {
+		super();
 		this.id = id;
 		this.title = title;
 		this.fileName = fileName;
-		this.hourseId = hourseId;
+		this.houseId = houseId;
 	}
 
 	public Integer getId() {
@@ -40,11 +41,11 @@ public class Photo {
 		this.fileName = fileName;
 	}
 
-	public Integer getHourseId() {
-		return hourseId;
+	public Integer getHouseId() {
+		return houseId;
 	}
 
-	public void setHourseId(Integer hourseId) {
-		this.hourseId = hourseId;
+	public void setHouseId(Integer houseId) {
+		this.houseId = houseId;
 	}
 }

@@ -39,4 +39,14 @@
 		<put-attribute name="pageTitle" value="用户管理" />
 		<put-attribute name="main" value="/WEB-INF/jsp/admin/userManager.jsp" />
 	</definition> 
+	<!-- 房屋管理 -->
+	<definition name="admin/houseManager" extends="adminTemplate">
+		<put-attribute name="pageTitle" value="房源管理" />
+		<put-attribute name="main" value="/WEB-INF/jsp/admin/houseManager.jsp" />
+	</definition> 
+	<!-- 房屋管理 -->
+	<definition name="admin/houseDetailed" extends="adminTemplate">
+		<put-attribute name="pageTitle" value="房屋详情" />
+		<put-attribute name="main" value="/WEB-INF/jsp/admin/houseDetailed.jsp" />
+	</definition>
 </tiles-definitions>

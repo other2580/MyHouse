@@ -55,4 +55,12 @@
 	<select id="getUserByPrefix" resultType="String" parameterType="String">
 		SELECT `userName` FROM `User` WHERE `userName` LIKE CONCAT('%',#{prefix},'%')
 	</select>
+	
+	<select id="getUserIdByPrefix" resultType="String" parameterType="String">
+		SELECT `id`, `userName` FROM `User` WHERE `userName` LIKE CONCAT('%',#{prefix},'%')
+	</select>
+	
+	<select id="getUserInfo" resultType="User">
+		SELECT id,userName FROM `USER`
+	</select>
 </mapper>

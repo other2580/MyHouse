@@ -25,6 +25,12 @@
 	<select id="getAll" resultType="Street">
 		<include refid="sql" />
 	</select>
+	<select id="getStreetByDistrictId" resultType="Street" parameterType="int">
+		<include refid="sql" />
+		<where>
+			<if test="districtId > 0"> AND districtId = #{districtId}</if>
+		</where>
+	</select>
 	<select id="fetchStreetRows" resultType="int" parameterType="hashmap">
 		SELECT COUNT(1) FROM `Street`
 		<where>

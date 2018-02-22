@@ -1,6 +1,7 @@
 package myhouse.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -40,4 +41,8 @@ public interface UserMapper {
 			@Param("start") int start, @Param("length") int lengt);
 
 	public List<String> getUserByPrefix(@Param("prefix") String prefix);
+	
+	public Map<String, Object> getUserIdByPrefix(@Param("prefix") String prefix);
+	
+	public List<User> getUserInfo();
 }

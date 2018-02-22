@@ -97,4 +97,11 @@ public class StreetController {
 		}
 		return map;
 	}
+
+	@RequestMapping("/getStreetByDistrictId")
+	@ResponseBody
+	public List<Street> getStreetByDistrictId(int districtId) {
+		return streetService.getStreetByDistrictId(districtId);
+	}
+
 }

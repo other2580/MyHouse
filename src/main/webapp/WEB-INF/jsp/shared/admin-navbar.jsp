@@ -32,6 +32,7 @@
 		        </li>
 		      </ul>
 	     	</li>
+	     	<li><a href="${pageContext.request.contextPath}/admin/houseManager"><i class="fa fa-home fa-lg"></i>&nbsp;房源管理</a></li>
 	     	<li><a href="${pageContext.request.contextPath}/admin/userManager"><i class="fa fa-user-secret fa-lg"></i>&nbsp;用户管理</a></li>
 	      </ul>
 	      

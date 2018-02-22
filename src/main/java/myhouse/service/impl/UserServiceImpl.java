@@ -89,4 +89,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getUserByPrefix(prefix);
 	}
 
+	@Override
+	public List<User> getUserInfo(){
+		return userMapper.getUserInfo();
+	}
+
 }

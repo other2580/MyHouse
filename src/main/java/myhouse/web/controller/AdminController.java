@@ -37,4 +37,8 @@ public class AdminController {
 		return "admin/userManager"; 
 	}
 
+	@RequestMapping("/houseManager")
+	public String houseManager() {
+		return "admin/houseManager"; 
+	}
 }

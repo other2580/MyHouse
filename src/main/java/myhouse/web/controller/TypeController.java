@@ -1,6 +1,7 @@
 package myhouse.web.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -79,5 +80,11 @@ public class TypeController {
 			}
 		}
 		return map;
+	}
+	
+	@RequestMapping("/getAllType")
+	@ResponseBody
+	public List<Type> getAllType(){
+		return typeService.getAll();
 	}
 }

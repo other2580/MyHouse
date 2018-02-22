@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myhouse.dao.HouseMapper">
+	<insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="House">
+		INSERT INTO `House`(`UserId`,`TypeId`,`StreetId`,`FLOOR`,`Price`,`UpdateTime`,`Topic`,`Content`,`longitude`,`latitude`,`State`)
+			VALUES (#{userId}, #{typeId}, #{streetId}, #{floor}, #{price}, #{updateTime}, #{topic}, #{content}, #{longitude}, #{latitude}, #{state})
+	</insert>
+	<delete id="delete" parameterType="int">
+		DELETE FROM `House` WHERE id = #{id}
+	</delete>
+	<update id="update" parameterType="House">
+		UPDATE `House` SET `UserId` = #{userId},`TypeId` = #{typeId},`StreetId` = #{streetId},`FLOOR` = #{floor},`Price` = #{price},`UpdateTime` = #{updateTime},`Topic` = #{topic},`Content` = #{content},`longitude` = #{longitude},`latitude` = #{latitude} ,`State` = #{state})
+			WHERE id =　#{id}
+	</update>
+	<update id="modifyState" parameterType="hashmap">
+		UPDATE `House` SET `State` = #{state} WHERE id = #{id}
+	</update>
+	
+	<sql id="houseSql">
+		SELECT h.*,u.userName,s.`NAME` AS 'streetName',t.`NAME` AS 'typeName' FROM House h 
+			LEFT JOIN `user` u ON(u.id = h.userId)
+			LEFT JOIN street s ON(s.`Id` = h.`StreetId`)
+			LEFT JOIN TYPE t ON(t.`Id` = h.`TypeId`)
+	</sql>
+	
+	<select id="getHouseById" resultType="House" parameterType="int">
+		<include refid="houseSql" /> WHERE h.id = #{id}
+	</select>
+	<select id="getAll" resultType="House">
+		<include refid="houseSql" /> ORDER BY `UpdateTime` DESC 
+	</select>
+	
+	<select id="fetchHouseRows" resultType="int" parameterType="hashmap">
+		SELECT COUNT(1) FROM `House`
+		<where>
+			<if test="userId > 0">
+				AND `UserId` = #{userId}
+			</if>
+			<if test="districtId > 0">
+				AND `StreetId` IN(SELECT `id` FROM `Street` WHERE `DistrictId` = #{districtId})
+			</if>
+			<if test="streetId > 0">
+				AND `StreetId` = #{streetId}
+			</if>
+			<if test="typeId > 0">
+				AND TypeId = #{typeId}
+			</if>
+			<if test="minPrice > 0">
+				AND price BETWEEN #{minPrice} AND #{maxPrice}
+			</if>
+			<if test="state &lt; 2">
+				AND `State` = #{state}
+			</if>
+		</where>
+	</select>
+	<select id="getHousesPagings" resultType="House" parameterType="hashmap">
+		<include refid="houseSql" />
+		<where>
+			<if test="userId > 0">
+				AND `UserId` = #{userId}
+			</if>
+			<if test="districtId > 0">
+				AND `StreetId` IN(SELECT `id` FROM `Street` WHERE `DistrictId` = #{districtId})
+			</if>
+			<if test="streetId > 0">
+				AND `StreetId` = #{streetId}
+			</if>
+			<if test="typeId > 0">
+				AND TypeId = #{typeId}
+			</if>
+			<if test="minPrice > 0">
+				AND price BETWEEN #{minPrice} AND #{maxPrice}
+			</if>
+			<if test="state &lt; 2">
+				AND `State` = #{state}
+			</if>
+		</where>
+		ORDER BY `UpdateTime` DESC 
+		LIMIT #{start}, #{length}
+	</select>
+	<select id="getHouseByPrefix" resultType="String" parameterType="String">
+		SELECT `Topic` FROM `House` WHERE `Topic` LIKE CONCAT('%',#{prefix},'%')
+	</select>
+</mapper>

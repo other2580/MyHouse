@@ -37,4 +37,6 @@ public interface UserService {
 			@Param("start") int start, @Param("length") int lengt);
 
 	public List<String> getUserByPrefix(@Param("prefix") String prefix);
+	
+	public List<User> getUserInfo();
 }

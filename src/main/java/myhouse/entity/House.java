@@ -5,8 +5,11 @@ import java.util.Date;
 public class House {
 	private Integer id;
 	private Integer userId;
+	private String userName;
 	private Integer typeId;
+	private String typeName;
 	private Integer streetId;
+	private String streetName;
 	private Integer floor;
 	private double price;
 	private Date updateTime;
@@ -19,8 +22,9 @@ public class House {
 	public House() {
 	}
 
-	public House(Integer id, Integer userId, Integer typeId, Integer streetId, Integer floor, double price,
-			Date updateTime, String topic, String content, double longitude, double latitude, Integer state) {
+	public House(Integer id, Integer userId, Integer typeId, Integer streetId,
+			Integer floor, double price, Date updateTime, String topic,
+			String content, double longitude, double latitude, Integer state) {
 		this.id = id;
 		this.userId = userId;
 		this.typeId = typeId;
@@ -49,6 +53,14 @@ public class House {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public Integer getTypeId() {
@@ -131,4 +143,19 @@ public class House {
 		this.state = state;
 	}
 
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public String getStreetName() {
+		return streetName;
+	}
+
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
 }

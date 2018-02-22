@@ -19,12 +19,15 @@ public interface StreetService {
 
 	public List<Street> getAll();
 
+	public List<Street> getStreetByDistrictId(
+			@Param("districtId") int districtId);
+
 	public int fetchStreetRows(@Param("districtId") int districtId,
 			@Param("streetName") String streetName);
 
 	public List<Street> getStreetsPagings(@Param("districtId") int districtId,
 			@Param("streetName") String streetName, @Param("start") int start,
 			@Param("length") int length);
-	
+
 	public List<String> getStreetByPrefix(@Param("prefix") String prefix);
 }
