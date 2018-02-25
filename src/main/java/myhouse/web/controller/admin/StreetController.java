@@ -1,4 +1,4 @@
-package myhouse.web.controller;
+package myhouse.web.controller.admin;
 
 import java.util.HashMap;
 import java.util.List;

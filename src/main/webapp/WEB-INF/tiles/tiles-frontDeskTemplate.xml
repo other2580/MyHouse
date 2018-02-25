@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- 定义前台模板  -->
+	<definition name="frontDeskTemplate" template="/WEB-INF/jsp/shared/frontDesk-template.jsp">
+		<put-attribute name="navbar" value="/WEB-INF/jsp/shared/frontDesk-navbar.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/shared/frontDesk-footer.jsp" />
+	</definition>
+	<!-- 前台主页 -->
+	<definition name="index" extends="frontDeskTemplate">
+		<put-attribute name="pageTitle" value="myHouse" />
+		<put-attribute name="main" value="/WEB-INF/jsp/index.jsp" />
+	</definition>
+	<!-- 前台登录页 -->
+	<definition name="login" extends="frontDeskTemplate">
+		<put-attribute name="pageTitle" value="欢迎登录" />
+		<put-attribute name="navbar" value="" />
+		<put-attribute name="main" value="/WEB-INF/jsp/login.jsp" />
+		<put-attribute name="footer" value=" " />
+	</definition>
+	<!-- 前台注册页 -->
+	<definition name="register" extends="frontDeskTemplate">
+		<put-attribute name="pageTitle" value="欢迎注册" />
+		<put-attribute name="navbar" value="" />
+		<put-attribute name="main" value="/WEB-INF/jsp/register.jsp" />
+		<put-attribute name="footer" value=" " />
+	</definition>
+	<!-- 个人中心-->
+	<definition name="userInfo" extends="frontDeskTemplate">
+		<put-attribute name="pageTitle" value="个人中心" />
+		<put-attribute name="main" value="/WEB-INF/jsp/userInfo.jsp" />
+	</definition>
+</tiles-definitions>

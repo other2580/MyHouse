@@ -17,9 +17,13 @@
 	<update id="modifyByUse" parameterType="hashmap">
 		UPDATE `User` SET `IsInUse` = #{isInUse} WHERE `id` = #{id}
 	</update>
-		<update id="modifyByAdmin" parameterType="hashmap">
+	<update id="modifyByAdmin" parameterType="hashmap">
 		UPDATE `User` SET `IsAdmin` = #{isAdmin} WHERE `id` = #{id}
 	</update>
+	<update id="modifyPwd" parameterType="hashmap">
+		UPDATE `User` SET `password` = #{password} WHERE `id` = #{id}
+	</update>
+	
 	<select id="getUserById" resultType="User" parameterType="int">
 		SELECT * FROM `User` WHERE `id` = #{id}
 	</select>

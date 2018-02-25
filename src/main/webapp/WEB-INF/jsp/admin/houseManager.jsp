@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/dataTable/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/dataTable/dataTables.bootstrap.js"></script>
-<script type="text/javascript" src="${initParam.staticUrl}/js/plugins/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${initParam.staticUrl}/js/include/admin/houseManager.js"></script>
 <link href="${initParam.staticUrl}/js/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
 <script src="${initParam.staticUrl}/js/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script src="${initParam.staticUrl}/js/plugins/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
-
+<script>
+	$(".selectIndex>li:nth-last-child(2)").attr("class","active");
+</script>
 <div class="container">
   <div class="row">
   	<div class="page-header">

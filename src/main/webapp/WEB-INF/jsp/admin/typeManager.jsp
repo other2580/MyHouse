@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/dataTable/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/dataTable/dataTables.bootstrap.js"></script>
-<script type="text/javascript" src="${initParam.staticUrl}/js/plugins/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${initParam.staticUrl}/js/include/admin/typeManager.js"></script>
+<script>
+	$(".selectIndex>li:nth-last-child(3) li:nth-of-type(3)").attr("class","active");
+</script>
 <div class="container">
   <div class="row">
   	<div class="page-header">

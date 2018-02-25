@@ -19,8 +19,9 @@ public interface UserMapper {
 
 	public int modifyByUse(@Param("id") int id, @Param("isInUse") int isInUse);
 
-	public int modifyByAdmin(@Param("id") int id, @Param("isAdmin") int isAdmin);
-	
+	public int modifyByAdmin(@Param("id") int id,
+			@Param("isAdmin") int isAdmin);
+
 	public User getUserById(@Param("id") int id);
 
 	public User login(@Param("userName") String userName,
@@ -41,8 +42,12 @@ public interface UserMapper {
 			@Param("start") int start, @Param("length") int lengt);
 
 	public List<String> getUserByPrefix(@Param("prefix") String prefix);
-	
-	public Map<String, Object> getUserIdByPrefix(@Param("prefix") String prefix);
-	
+
+	public Map<String, Object> getUserIdByPrefix(
+			@Param("prefix") String prefix);
+
 	public List<User> getUserInfo();
+
+	public int modifyPwd(@Param("password") String password,
+			@Param("id") int id);
 }

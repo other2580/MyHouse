@@ -18,7 +18,7 @@
 	
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
+	      <ul class="nav navbar-nav selectIndex">
 	        <li><a href="${pageContext.request.contextPath}/admin/admin-index">主页<span class="sr-only">(current)</span></a></li>
 	     	<li>
      		  <ul class="nav navbar-nav navbar-left">
@@ -35,10 +35,26 @@
 	     	<li><a href="${pageContext.request.contextPath}/admin/houseManager"><i class="fa fa-home fa-lg"></i>&nbsp;房源管理</a></li>
 	     	<li><a href="${pageContext.request.contextPath}/admin/userManager"><i class="fa fa-user-secret fa-lg"></i>&nbsp;用户管理</a></li>
 	      </ul>
-	      
+      	  <div class="btn-group nav navbar-nav navbar-right" style="padding-top: 8px;">
+            <button type="button" class="btn btn-primary">管理员设置</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                  <a href="#" data-toggle="modal" data-target="#changePwd_modal">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"> 修改登录密码</span>
+                  </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <a href="${pageContext.request.contextPath}/admin/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"> 登出</span></a>
+                </li>
+              </ul>
+          </div>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
   </div>
 </div>
-    

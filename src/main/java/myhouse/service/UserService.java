@@ -39,4 +39,7 @@ public interface UserService {
 	public List<String> getUserByPrefix(@Param("prefix") String prefix);
 	
 	public List<User> getUserInfo();
+	
+	public int modifyPwd(@Param("password") String password,
+			@Param("id") int id);
 }

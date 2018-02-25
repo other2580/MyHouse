@@ -3,8 +3,10 @@
 
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/dataTable/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${initParam.staticUrl}/js/plugins/dataTable/dataTables.bootstrap.js"></script>
-<script type="text/javascript" src="${initParam.staticUrl}/js/plugins/jquery.validate.min.js"></script>   
 <script type="text/javascript" src="${initParam.staticUrl}/js/include/admin/userManager.js"></script>
+<script>
+	$(".selectIndex>li:last-of-type").attr("class","active");
+</script>
 <div class="container">
   <div class="row">
 	<div class="page-header">

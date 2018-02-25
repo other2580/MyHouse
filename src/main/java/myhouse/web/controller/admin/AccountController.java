@@ -1,4 +1,4 @@
-package myhouse.web.controller;
+package myhouse.web.controller.admin;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,9 +33,30 @@ public class AccountController {
 		if (admin == null) {
 			model.addAttribute("error", "登录失败，请检查登录名密码是否有误!");
 			return "admin/admin-login";
+		} else if (admin.getIsInUse() == 0) {
+			model.addAttribute("error", "登录失败，该账户已被禁止使用!");
+			return "admin/admin-login";
 		} else {
 			session.setAttribute("admin", admin);
 			return "redirect:/admin/admin-index";
+		}
+	}
+
+	@RequestMapping(value = "checkUserLogin", method = RequestMethod.POST)
+	public String checkUserLogin(
+			@RequestParam(name = "userName", required = true) String userName,
+			@RequestParam(name = "password", required = true) String password,
+			HttpSession session, Model model) {
+		User user = userService.login(userName, password);
+		if (user == null) {
+			model.addAttribute("error", "登录失败，请检查登录名密码是否有误!");
+			return "login";
+		} else if (user.getIsInUse() == 0) {
+			model.addAttribute("error", "登录失败，该账户已被禁止使用!");
+			return "login";
+		} else {
+			session.setAttribute("loginUser", user);
+			return "redirect:/index";
 		}
 	}
 
@@ -86,7 +107,7 @@ public class AccountController {
 		}
 	}
 
-	@RequestMapping("admin/checkUserName")
+	@RequestMapping(value = {"admin/checkUserName", "checkUserName"})
 	@ResponseBody
 	public boolean checkUserName(
 			@RequestParam(name = "userName", required = true) String userName) {
@@ -98,7 +119,8 @@ public class AccountController {
 
 	@RequestMapping("admin/saveUser")
 	@ResponseBody
-	public Map<String, Object> saveUser(@Valid User user, BindingResult bindingResult) {
+	public Map<String, Object> saveUser(@Valid User user,
+			BindingResult bindingResult) {
 		Map<String, Object> map = new HashMap<>();
 		if (bindingResult.hasErrors()) {
 			map.put("state", false);
@@ -115,10 +137,71 @@ public class AccountController {
 		}
 		return map;
 	}
-	
+
+	@RequestMapping("/userRegister")
+	public String userRegister(@Valid User user, BindingResult bindingResult,
+			HttpSession session, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("user", user);
+			model.addAttribute("error", "有输入项不符合输入规则！");
+			return "register";
+		} else {
+			try {
+				user.setIsAdmin(0);
+				user.setIsInUse(1);
+				userService.register(user);
+
+				session.setAttribute("loginUser", user);
+				return "redirect:/index";
+			} catch (Exception e) {
+				model.addAttribute("user", user);
+				model.addAttribute("error", "有输入项不符合输入规则！");
+				return "register";
+			}
+		}
+	}
+
 	@RequestMapping("admin/getUserName")
 	@ResponseBody
-	public List<User> getUserName(){
+	public List<User> getUserName() {
 		return userService.getUserInfo();
+	}
+
+	@RequestMapping("admin/checkAdminPwd")
+	@ResponseBody
+	public boolean checkAdminPwd(String password, HttpSession session) {
+		User user = (User) session.getAttribute("admin");
+		if (password.equals(user.getPassword()))
+			return true;
+		else
+			return false;
+	}
+
+	@RequestMapping("admin/modifyPwd")
+	@ResponseBody
+	public Map<String, Object> modifyPwd(String password, HttpSession session) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			User user = (User) session.getAttribute("admin");
+			userService.modifyPwd(password, user.getId());
+			map.put("state", true);
+			map.put("message", "Ok");
+		} catch (Exception e) {
+			map.put("state", false);
+			map.put("message", "修改密码出错！");
+		}
+		return map;
+	}
+
+	@RequestMapping("admin/logout")
+	public String adminLogout(HttpSession session) {
+		session.removeAttribute("admin");
+		return "redirect:/admin/admin-login";
+	}
+
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginUser");
+		return "redirect:/index";
 	}
 }

@@ -94,4 +94,10 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getUserInfo();
 	}
 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, timeout = 60)
+	public int modifyPwd(String password, int id) {
+		return userMapper.modifyPwd(password, id);
+	}
+
 }

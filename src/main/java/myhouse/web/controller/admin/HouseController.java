@@ -1,4 +1,4 @@
-package myhouse.web.controller;
+package myhouse.web.controller.admin;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ import myhouse.service.PhotoService;
 public class HouseController {
 	@Autowired
 	private HouseService houseService;
-	
+
 	@Autowired
 	private PhotoService photoService;
 
@@ -63,5 +63,18 @@ public class HouseController {
 		model.addAttribute("house", houseService.getHouseById(id));
 		model.addAttribute("photo", photoService.getPhotoByHouseIdId(id));
 		return "admin/houseDetailed";
+	}
+
+	@RequestMapping("admin/delHouse")
+	@ResponseBody
+	public boolean delHouse(
+			@RequestParam(name = "id", required = true) int id) {
+		try {
+			photoService.delete(id);
+			houseService.delete(id);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }
